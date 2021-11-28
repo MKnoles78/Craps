@@ -19,8 +19,30 @@ public class Craps {
 	private static final int YO_LEVEN = 11;
 	private static final int BOX_CARS = 12;
 
+	// plays one game of craps
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		int myPoint = 0; // point if no win or loss on first roll
+		Status gameStatus; // can contain CONTINUE, WON OR LOST
+
+		int sumOfDice = rollDice(); // first roll of the dice
+
+		// determine game status and point based on first roll
+		switch (sumOfDice) {
+		case SEVEN: // win with 7 on first roll
+		case YO_LEVEN: // win with 11 on first roll
+			gameStatus = Status.WON;
+			break;
+		case SNAKE_EYES: // lose with 2 on first roll
+		case TREY: // lose with 3 on first roll
+		case BOX_CARS: // lose with 12 on first roll
+			gameStatus = Status.LOST;
+			break;
+		default: // did not win or lose, so remember point
+			gameStatus = Status.CONTINUE; // game is not over
+			myPoint = sumOfDice; // remember the point
+			System.out.printf("Point is %d%n", myPoint);
+			break;
+		}
 
 	}
 
