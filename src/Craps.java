@@ -44,6 +44,40 @@ public class Craps {
 			break;
 		}
 
+		// while game is not complete
+		while (gameStatus == Status.CONTINUE) { // not WON or LOST
+			sumOfDice = rollDice(); // roll dice again
+
+			// determine game status
+			if (sumOfDice == myPoint) { // win by making point
+				gameStatus = Status.WON;
+			} else {
+				if (sumOfDice == SEVEN) { // lose by rolling 7 before point
+					gameStatus = Status.LOST;
+				}
+			}
+		}
+
+		// display won or lost message
+		if (gameStatus == Status.WON) {
+			System.out.println("Player wins");
+		} else {
+			System.out.println("Player loses");
+		}
+	}
+
+	// roll dice, calculate sum and display results
+	public static int rollDice() {
+		// pick random die values
+		int die1 = 1 + randomNumbers.nextInt(6); // first die roll
+		int die2 = 1 + randomNumbers.nextInt(6); // second die roll
+
+		int sum = die1 + die2; // sum of die values
+
+		// display results of this roll
+		System.out.printf("Player rolled %d + %d = %d%n", die1, die2, sum);
+
+		return sum;
 	}
 
 }
